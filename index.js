@@ -15,7 +15,13 @@ server.use(express.json())
 server.use(session({
     resave: false,
     saveUninitialized: false,
+    name: "real_session_name",
     secret: "super secret secret! shhh!",
+    cookie: {
+        maxAge: 30 * 1000, //30 seconds for testing purposes
+        secure: false, // should be true in production
+        httpOnly: true
+    },
     store: new KnexSessionStore({
         knex: db,
         createtable: true,
