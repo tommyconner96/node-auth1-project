@@ -4,7 +4,7 @@ const cors = require("cors")
 const session = require("express-session")
 const KnexSessionStore = require("connect-session-knex")(session)
 const db = require("./database/data")
-// const usersRouter = require("./users/user-router")
+const userRouter = require("./users/user-router")
 
 const server = express()
 const port = process.env.PORT || 5000
@@ -22,7 +22,7 @@ server.use(session({
     }),
 }))
 
-// server.use(usersRouter)
+server.use('/api', userRouter)
 
 server.use((err, req, res, next) => {
     console.log(err)
